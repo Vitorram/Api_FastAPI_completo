@@ -1,23 +1,24 @@
 from sqlalchemy import create_engine, Column, String, Integer, Boolean, Float, ForeignKey
-from sqlalchemy import declarative_base
+from sqlalchemy.orm import declarative_base
 
 
 
-#crinado a conexção
 db = create_engine("sqlite:///banco.db")
 
-#base
+# base
 Base = declarative_base()
 
-#criando as classes 
+
+# criando as classes 
 class Usuario(Base):
     __tablename__ = "usuarios"
+
     id = Column("id", Integer, primary_key=True, autoincrement=True)
-    nome = Column ("name", String)
-    email = Column ("email", String, nullable=False)
-    senha = Column ("senha", String)
-    ativo = Column ("ativo", Boolean)
-    admin = Column ("adm", Boolean, default=False)
+    nome = Column("name", String)
+    email = Column("email", String, nullable=False)
+    senha = Column("senha", String)
+    ativo = Column("ativo", Boolean)
+    admin = Column("adm", Boolean, default=False)
 
     def __init__(self, nome, email, senha, ativo=True, admin=False):
         self.nome = nome
@@ -25,9 +26,34 @@ class Usuario(Base):
         self.senha = senha
         self.ativo = ativo
         self.admin = admin
-        
-#Pedido
-#ItensPedidos
-#
 
-#exectando metadados
+
+class Pedido(Base):
+    __tablename__ = "pedidos"
+
+
+    id = Column("id", Integer, primary_key=True, autoincrement=True)
+    usuario = Column("usuario", Integer, ForeignKey("usuarios.id"))
+    preco = Column("preco", Float)
+    def __init__(self, usuario, status="PENDENTE", preco=0):
+        self.usuario = usuario
+        self.status = status
+        self.preco = preco
+
+
+class ItensPedido(Base):
+    __tablename__ = "itens_pedidos"
+
+    id = Column("id", Integer, primary_key=True, autoincrement=True)
+    quantidade = Column("quantidade", Integer)
+    sabor = Column("sabor", String)
+    tamanho = Column("tamanho", String)
+    preco_unitario = Column("preco_unitario", Float)
+    pedido = Column("pedido", Integer, ForeignKey("pedidos.id"))
+
+    def __init__(self, quantidade, sabor, tamanho, preco_unitario, pedido):
+        self.quantidade = quantidade
+        self.sabor = sabor
+        self.tamanho = tamanho
+        self.preco_unitario = preco_unitario
+        self.pedido = pedido

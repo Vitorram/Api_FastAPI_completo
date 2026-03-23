@@ -2,6 +2,13 @@
 
 #importacção de dependencias
 from fastapi import FastAPI
+from passlib.context import CryptContext
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY")
+bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 #importacção de pastas
 from auth_routes import auth_routes
