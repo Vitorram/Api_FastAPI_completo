@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine, Column, String, Integer, Boolean, Float, ForeignKey
-from sqlalchemy.orm import declarative_base
-
+from sqlalchemy.orm import declarative_base, relationship
 
 
 db = create_engine("sqlite:///banco.db")
@@ -20,7 +19,7 @@ class Usuario(Base):
     ativo = Column("ativo", Boolean)
     admin = Column("adm", Boolean, default=False)
 
-    def __init__(self, nome, email, senha, ativo=True, admin=False):
+    def __init__(self, nome, email, senha, ativo, admin):
         self.nome = nome
         self.email = email
         self.senha = senha
@@ -38,10 +37,18 @@ class Pedido(Base):
     status = Column("status", String, default="PENDENTE")
 
     
+    itens = relationship("ItensPedido", backref="pedido_obj")
+
     def __init__(self, usuario, status="PENDENTE", preco=0):
         self.usuario = usuario
         self.status = status
         self.preco = preco
+    
+    def calcular_preco_total(self, itens):
+        total = 0
+        for item in itens:
+            total += item.quantidade * item.preco_unitario
+        self.preco = total
 
 
 class ItensPedido(Base):

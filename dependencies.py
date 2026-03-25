@@ -23,7 +23,7 @@ from passlib.context import CryptContext # Se ainda não estiver aí
 load_dotenv()
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-outh_2 = OAuth2PasswordBearer(tokenUrl="auth/login")
+outh_2 = OAuth2PasswordBearer(tokenUrl="auth/login-form")
 # ... suas outras funções
     
 def verificar_token(token:str = Depends(outh_2), session = Depends(pegar_sessao)):
@@ -33,7 +33,7 @@ def verificar_token(token:str = Depends(outh_2), session = Depends(pegar_sessao)
         id_usuario = payload.get("sub")
     except JWTError:
         raise HTTPException(status_code=401, detail="Token inválido")
-    usuario = session.query(Usuario).filter(Usuario.id==id_usuario).first()
+    usuario = session.query(Usuario).filter(Usuario.email==id_usuario).first()
     if not usuario:
         raise HTTPException(status_code=401, detail="Usuário não encontrado")
     return usuario
