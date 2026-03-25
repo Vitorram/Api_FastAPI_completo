@@ -95,5 +95,22 @@ async def finalizar_pedido(id_pedido: int, session: Session = Depends(pegar_sess
         }
 
 #Visualizar 1 pedido
+@order_routes.get("/pedido/{id_pedido}")
+async def visualizar_pedido(id_pedido: int, session: Session = Depends(pegar_sessao), usuario: Usuario = Depends(verificar_token)):
+    pedido = session.query(Pedido).filter(Pedido.id == id_pedido).first()
+    if not pedido:
+        raise HTTPException(status_code=404, detail="Pedido não encontrado")
+    if not usuario.admin and usuario.id != pedido.usuario:
+        raise HTTPException(status_code=403, detail="Acesso negado para visualizar este pedido")
+    itens_do_pedido = session.query(ItensPedido).filter(ItensPedido.pedido == id_pedido).all()
+
+    return {"pedido": pedido,
+            "itens": itens_do_pedido
+        }
 
 #Listar pedidos do usuário
+@order_routes.get("/meus_pedidos")
+async def listar_meus_pedidos(session: Session = Depends(pegar_sessao), usuario: Usuario = Depends(verificar_token)):
+    pedidos = session.query(Pedido).filter(Pedido.usuario == usuario.id).all()
+    return {"pedidos": pedidos}
+

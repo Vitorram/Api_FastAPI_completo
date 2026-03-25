@@ -1,3 +1,4 @@
+
 from models import Usuario, db
 from sqlalchemy.orm import sessionmaker, Session
 from passlib.context import CryptContext
@@ -37,3 +38,4 @@ def verificar_token(token:str = Depends(outh_2), session = Depends(pegar_sessao)
     if not usuario:
         raise HTTPException(status_code=401, detail="Usuário não encontrado")
     return usuario
+

@@ -112,3 +112,4 @@ async def Login_form(dados_formulario: OAuth2PasswordRequestForm = Depends(), se
         "access_token": access_token,
         "token_type": "bearer"
     }
+
