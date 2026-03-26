@@ -15,7 +15,12 @@ from auth_routes import auth_routes
 from order_routes import order_routes
 from dependencies import bcrypt_context
 
+from fastapi import FastAPI
+
 app = FastAPI(
+    title="API de Pedidos de Pizzas",
+    description="API para gerenciamento de pedidos de pizzas, incluindo autenticação e autorização.",
+    version="1.0.0"
 )
 
 app.include_router(auth_routes)
