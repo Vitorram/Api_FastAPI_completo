@@ -1,10 +1,10 @@
-#FastAPI Project
+# FastAPI Project
 
 API desenvolvida com FastAPI utilizando autenticação JWT, SQLAlchemy, Alembic e arquitetura escalável para aplicações modernas.
 
 ---
 
-# 📌 Tecnologias
+# Tecnologias
 
 - Python
 - FastAPI
@@ -17,9 +17,9 @@ API desenvolvida com FastAPI utilizando autenticação JWT, SQLAlchemy, Alembic 
 
 ---
 
-# ⚙️ Instalação
+# Instalação
 
-## 1️⃣ Clone o projeto
+## 1. Clone o projeto
 
 ```bash
 git clone <repository_url>
@@ -27,7 +27,7 @@ git clone <repository_url>
 
 ---
 
-## 2️⃣ Crie o ambiente virtual
+## 2. Crie o ambiente virtual
 
 ### Linux/macOS
 
@@ -44,7 +44,7 @@ venv\Scripts\activate
 
 ---
 
-## 3️⃣ Instale as dependências
+## 3. Instale as dependências
 
 ```bash
 pip install -r requirements.txt
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 ---
 
-# 📦 Requirements
+# Requirements
 
 ```txt
 alembic==1.18.4
@@ -90,7 +90,7 @@ uvicorn==0.42.0
 
 ---
 
-# 🔐 Variáveis de Ambiente
+# Variáveis de Ambiente
 
 Crie um arquivo `.env` na raiz:
 
@@ -106,7 +106,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 
 ---
 
-# 🗄️ Migrações com Alembic
+# Migrações com Alembic
 
 ## Criar migration
 
@@ -122,7 +122,7 @@ alembic upgrade head
 
 ---
 
-# ▶️ Executando o Projeto
+# Executando o Projeto
 
 ```bash
 uvicorn app.main:app --reload
@@ -136,7 +136,7 @@ http://127.0.0.1:8000
 
 ---
 
-# 📘 Documentação Automática
+# Documentação Automática
 
 Swagger:
 
@@ -152,7 +152,7 @@ http://127.0.0.1:8000/redoc
 
 ---
 
-# 🔑 Funcionalidades
+# Funcionalidades
 
 - Autenticação JWT
 - CRUD completo
@@ -164,7 +164,7 @@ http://127.0.0.1:8000/redoc
 
 ---
 
-# 🐳 Docker
+# Docker
 
 ## Build
 
@@ -180,6 +180,6 @@ docker run -p 8000:8000 fastapi-project
 
 ---
 
-# 👨‍💻 Autor
+# Autor
 
-Desenvolvido por Vitor Ramos 🚀
+Desenvolvido por Vitor Ramos
