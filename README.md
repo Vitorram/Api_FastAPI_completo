@@ -1,185 +1,114 @@
-# FastAPI Project
+# FastAPI Auth API
 
-API desenvolvida com FastAPI utilizando autenticação JWT, SQLAlchemy, Alembic e arquitetura escalável para aplicações modernas.
+API REST desenvolvida com **FastAPI** para praticar uma arquitetura de backend organizada, autenticação JWT e persistência de dados.
 
----
+## Sobre o projeto
 
-# Tecnologias
+O projeto implementa uma API com autenticação e operações de CRUD, utilizando banco de dados relacional, migrations e validação de dados.
+
+A proposta foi aplicar conceitos comuns em aplicações backend modernas, mantendo responsabilidades separadas e uma base preparada para evolução.
+
+## Tecnologias
 
 - Python
 - FastAPI
 - SQLAlchemy
 - Alembic
-- JWT Authentication
+- Pydantic
 - MySQL
-- Docker
+- JWT
+- bcrypt
 - Uvicorn
+- Docker
 
----
+## Funcionalidades
 
-# Instalação
+- Autenticação com JWT
+- Hashing de senhas
+- CRUD
+- Validação de dados com Pydantic
+- Persistência com SQLAlchemy
+- Migrations com Alembic
+- Documentação automática via Swagger e ReDoc
 
-## 1. Clone o projeto
+## Como executar
 
+### 1. Clone o projeto
 ```bash
-git clone <repository_url>
+git clone https://github.com/Vitorram/Api_FastAPI_completo.git
+cd Api_FastAPI_completo
 ```
 
----
+### 2. Crie e ative o ambiente virtual
 
-## 2. Crie o ambiente virtual
+Windows:
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
-### Linux/macOS
-
+Linux/macOS:
 ```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
-### Windows
-
-```bash
-venv\Scripts\activate
-```
-
----
-
-## 3. Instale as dependências
-
+### 3. Instale as dependências
 ```bash
 pip install -r requirements.txt
 ```
 
----
+### 4. Configure as variáveis de ambiente
 
-# Requirements
-
-```txt
-alembic==1.18.4
-annotated-doc==0.0.4
-annotated-types==0.7.0
-anyio==4.12.1
-bcrypt==5.0.0
-cffi==2.0.0
-click==8.3.1
-cryptography==46.0.5
-ecdsa==0.19.1
-fastapi==0.135.1
-greenlet==3.3.2
-h11==0.16.0
-idna==3.11
-Mako==1.3.10
-MarkupSafe==3.0.3
-passlib==1.7.4
-pyasn1==0.6.3
-pycparser==3.0
-pydantic==2.12.5
-pydantic_core==2.41.5
-python-dotenv==1.2.2
-python-jose==3.5.0
-python-multipart==0.0.22
-rsa==4.9.1
-six==1.17.0
-SQLAlchemy==2.0.48
-SQLAlchemy-Utils==0.42.1
-starlette==0.52.1
-typing-inspection==0.4.2
-typing_extensions==4.15.0
-uvicorn==0.42.0
+Crie um arquivo .env:
 ```
-
----
-
-# Variáveis de Ambiente
-
-Crie um arquivo `.env` na raiz:
-
-```env
 DATABASE_URL=mysql+pymysql://user:password@localhost/db_name
-
 SECRET_KEY=your_secret_key
-
 ALGORITHM=HS256
-
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
----
-
-# Migrações com Alembic
-
-## Criar migration
-
-```bash
-alembic revision --autogenerate -m "create tables"
-```
-
-## Executar migrations
-
+### 5. Execute as migrations
 ```bash
 alembic upgrade head
 ```
 
----
-
-# Executando o Projeto
-
+### 6. Inicie a API
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Servidor:
+## Documentação
 
-```txt
-http://127.0.0.1:8000
+Com a aplicação em execução:
+- Swagger: http://127.0.0.1:8000/docs
+- ReDoc: http://127.0.0.1:8000/redoc
+
+## Arquitetura
+
+
+```text
+Cliente
+   ↓
+FastAPI / Rotas
+   ↓
+Schemas / Validação
+   ↓
+Serviços e regras de negócio
+   ↓
+SQLAlchemy
+   ↓
+MySQL
 ```
 
----
+## Próximos passos
 
-# Documentação Automática
+- Adicionar testes automatizados
+- Melhorar tratamento global de erros
+- Adicionar paginação e filtros
+- Criar pipeline de CI
+- Publicar uma instância de demonstração
 
-Swagger:
+## Autor
 
-```txt
-http://127.0.0.1:8000/docs
-```
-
-Redoc:
-
-```txt
-http://127.0.0.1:8000/redoc
-```
-
----
-
-# Funcionalidades
-
-- Autenticação JWT
-- CRUD completo
-- Migrations com Alembic
-- Validação com Pydantic
-- Arquitetura modular
-- Integração com banco de dados
-- Segurança com hashing de senhas
-
----
-
-# Docker
-
-## Build
-
-```bash
-docker build -t fastapi-project .
-```
-
-## Run
-
-```bash
-docker run -p 8000:8000 fastapi-project
-```
-
----
-
-# Autor
-
-Desenvolvido por Vitor Ramos
+**Vitor Ramos**
